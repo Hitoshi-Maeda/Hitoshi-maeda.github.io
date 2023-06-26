@@ -10,7 +10,7 @@
 
 <body>
   <h1>DIG プログラミング基礎 最終プレゼン</h1>
-  <h2>Ⅰ．対象：DAY10 for － in ループ 中級演習１問目</h2>
+  <h2>Ⅰ．対象：DAY10　for － in ループ 中級演習１問目</h2>
   <h2>Ⅱ．報告内容</h2>
   <h3>１．問題の内容</h3>
     <div>
@@ -89,6 +89,25 @@
       </p>
     </div>
     <div>
+      <pre>
+        <code>
+          function swapPairs2(object) {
+            const result = {};
+            const reveseArrayOfValue = [];
+            const reverseArrayOfkey = [];
+            for (const key in object) {
+              reveseArrayOfValue.unshift(object[key]);
+              reverseArrayOfkey.unshift(key);
+              }
+              for (const value of reveseArrayOfValue) {
+                result[value] = reverseArrayOfkey[reveseArrayOfValue.indexOf(value)];
+              }
+            return result;
+            }    
+        </code>
+      </pre>
+    </div>
+    <div>
       <img src=try2_result_array_consolelog.jpg>      
     </div>
     <div>
@@ -104,6 +123,30 @@
       <p>
         【トライ3回目】keyとvalueの正順配列を作り、index順にobjectへ保管する
       </p>
+    </div>
+    <div>
+      <pre>
+        <code>
+          function swapPairs2(object) {
+            const result = {};
+            const arrayOfValue = [];
+            const arrayOfkey = [];
+            for (const key in object) {
+              arrayOfValue.push(object[key]);
+              arrayOfkey.push(key);
+              console.log("arrayOfValue:", arrayOfValue);
+              console.log("arrayOfkey:", arrayOfkey);
+              }
+              for (const value of arrayOfValue) {
+                result[value] = arrayOfkey[arrayOfValue.indexOf(value)];
+                console.log("value:", value);
+                console.log("index:", arrayOfValue.indexOf(value));
+                console.log(result);
+              }
+            return result;
+            }    
+        </code>
+      </pre>
     </div>
     <div>
       <img src=try3_result_array_consolelog.jpg>      
