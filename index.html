@@ -9,13 +9,79 @@
 </head>
 
 <body>
-  <h1>プレゼン用仮入力</h1>
-  <h2>Mac をお使いの方は、 <font color="blue"> Cmd + Option + J</font><br>
-    Windows/Linux をお使いの方は、 <font color="blue"> Control+Shift+J</font> <br>
-    をクリックして、デベロッパーツールを開いてください。</h2>
-  <h2>下記にユニコーンの画像が表示されていれば成功です！</h2>
-  <img src="https://cdn.dribbble.com/users/1281272/screenshots/4515441/unicorn.gif">
-  <h3>30分悩んで進まなくなったら…helpチャンネルで質問してみましょう！</h3>
+  <h1>DIG プログラミング基礎 最終プレゼン</h1>
+  <h2>Ⅰ．対象：DAY10 for － in ループ 中級演習１問目</h2>
+  <h2>Ⅱ．報告内容</h2>
+  <h3>１．問題の内容</h3>
+    <div>
+      <p>関数 swapPairs2 を宣言してください。</p>
+      <pre>
+        <code>
+          /**
+            * @param {object} ???
+            * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。重複する値がある場合は、最初のキーと値のペアのみを使用し、その後のペアは無視すること。
+            */
+            // ここにコードを書きましょう
+
+             const object5 = { a: 1, b: 2, c: 3, d: 1 };
+             const object6 = { a: 1, b: 1, c: 1, d: 1 };
+
+             // 1 はすでに使われているので、d:1 は無視される
+             test(swapPairs2(object5), { 1: "a", 2: "b", 3: "c" });
+             // この場合も 1 はすでに使われているので、 2 回目以降、 1 が値になるキーと値のペアは無視される。
+
+             test(swapPairs2(object6), { 1: "a" });  
+        </code>
+      </pre>
+    </div>
+  <h3>２．実施内容</h3>
+    <div>
+      <p>
+        * @param {object} ⇒パラメータをobjectと定義<br>
+        * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。<br>　重複する値がある場合は、最初のキーと値のペアのみを使用し、<em>その後のペアは無視すること。</em>
+      </p>
+      <p>
+        【前提】object内のkey-valueペアの順序はどう決まるのか？<br>
+          　　⇒　webで調べたが、うまくヒットするワードで検索できなかった<br>
+          　　⇒「#help]チャンネル活用＋講義内で質問で解決：今回は”a”から挿入順という判断<br>
+        【トライ1】object内のvalueを配列として取り出し、for-inループでkeyと比較し同じ場合、<br>
+        　　　　　カウントして１の時のみobjectにkey-valueペアを保管する
+      </p>
+    </div>
+    <div>
+      <pre>
+        <code>
+          function swapPairs2(object) {
+            const result = {};
+            const arrayOfValues =[];
+            for (const key in object) {
+              const value = object[key];
+              arrayOfValues.push(value);
+            }
+            for (const key1 in object) {
+              const value1 = object[key1];
+              let count = 0;
+              for (const arrayOfValue of arrayOfValues) {
+                  if ( value1 === arrayOfValue ) {
+                  count = count + 1;
+                  if ( count === 1) {
+                  result[value1] = key1;
+                  }
+                }    
+              }
+            }
+              return result;
+           }          
+        </code>
+      </pre>
+    </div>
+    <div>
+      <img src=try1_result.jpg>      
+    </div>
+    <div>
+      <img src=try1_result_consolelog.jpg>
+    </div>
+
 </body>
 
 </html>
