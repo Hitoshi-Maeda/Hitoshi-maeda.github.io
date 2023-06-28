@@ -3,169 +3,218 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1>
   <meta name="theme-color" content="#000000">
-  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" href="presen.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+  <title>Final Presenation</title>
 </head>
 
 <body>
-  <h1>DIG プログラミング基礎 最終プレゼン</h1>
-  <h2>Ⅰ．対象：DAY10　for － in ループ 中級演習１問目</h2>
-  <h2>Ⅱ．報告内容</h2>
+  <div class="wrapper0">
+    <h1 id="start">DIG プログラミング基礎 最終プレゼン</h1>
+    <p>
+      2023/7/3<br>生産本部人事室<br>リソーセスG<br>前田
+    </p>
+  </div>
+  <!--wrapper0終了-->
+  <h2>Ⅰ．対象：DAY10　for － in ループ 中級演習１問目　</h2>
+  <h3>報告者のプログラミングスキル</h3>
+  <div>30数年前の学生時にFORTRAN77を授業で受けた程度（<font color="red">ほぼスキルなし</font>）
+  </div>
+  <h2>Ⅱ．報告内容　</h2>
   <h3>１．問題の内容</h3>
-    <div>
-      <p>関数 swapPairs2 を宣言してください。</p>
-      <pre>
-        <code>
-          /**
-            * @param {object} ???
-            * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。重複する値がある場合は、最初のキーと値のペアのみを使用し、その後のペアは無視すること。
-            */
-            // ここにコードを書きましょう
+  <div>
+    <p>関数 swapPairs2 を宣言してください。</p>
+    <pre>
+      <code>
+        /**
+        * @param {object} ???
+        * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。
+        *重複する値がある場合は、最初のキーと値のペアのみを使用し、その後のペアは無視すること。
+        */
+        // ここにコードを書きましょう
+        
+        const object5 = { a: 1, b: 2, c: 3, d: 1 };
+        const object6 = { a: 1, b: 1, c: 1, d: 1 };
+        
+        // 1 はすでに使われているので、d:1 は無視される
+        test(swapPairs2(object5), { 1: "a", 2: "b", 3: "c" });
+        // この場合も 1 はすでに使われているので、 2 回目以降、 1 が値になるキーと値のペアは無視される。
 
-             const object5 = { a: 1, b: 2, c: 3, d: 1 };
-             const object6 = { a: 1, b: 1, c: 1, d: 1 };
-
-             // 1 はすでに使われているので、d:1 は無視される
-             test(swapPairs2(object5), { 1: "a", 2: "b", 3: "c" });
-             // この場合も 1 はすでに使われているので、 2 回目以降、 1 が値になるキーと値のペアは無視される。
-
-             test(swapPairs2(object6), { 1: "a" });  
-        </code>
-      </pre>
-    </div>
+        test(swapPairs2(object6), { 1: "a" });  
+      </code>
+    </pre>
+  </div>
   <h3>２．実施内容</h3>
-    <div>
-      <p>
-        * @param {object} ⇒パラメータをobjectと定義<br>
-        * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。<br>　重複する値がある場合は、最初のキーと値のペアのみを使用し、<em>その後のペアは無視すること。</em>
-      </p>
-      <p>
-        【前提】object内のkey-valueペアの順序はどう決まるのか？<br>
+  <div>
+    <style>
+      .pink {
+        background-color: lightpink;
+      }
+    </style>
+    <p>
+      * @param {object} ⇒パラメータをobjectと定義<br>
+      * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。<br>
+      　<span class="pink">重複する値がある場合は、最初のキーと値のペアのみを使用し、その後のペアは無視すること。</span>
+    </p>
+    <p>
+      【前提】object内のkey-valueペアの順序はどう決まるのか？<br>
           　　⇒　webで調べたが、うまくヒットするワードで検索できなかった<br>
           　　⇒「#help]チャンネル活用＋講義内で質問で解決：今回は”a”から挿入順という判断<br>
-        【トライ1】object内のvalueを配列として取り出し、for-inループでkeyと比較し同じ場合、<br>
-        　　　　　カウントして１の時のみobjectにkey-valueペアを保管する
-      </p>
-    </div>
-    <div>
-      <pre>
-        <code>
-          function swapPairs2(object) {
-            const result = {};
-            const arrayOfValues =[];
-            for (const key in object) {
-              const value = object[key];
-              arrayOfValues.push(value);
-            }
-            for (const key1 in object) {
-              const value1 = object[key1];
-              let count = 0;
-              for (const arrayOfValue of arrayOfValues) {
-                  if ( value1 === arrayOfValue ) {
-                  count = count + 1;
-                  if ( count === 1) {
-                  result[value1] = key1;
-                  }
-                }    
+    </p>
+  </div>
+  <div id="wrap1">
+    <p>
+    【トライ1】object内のvalueを配列として取り出し、for-inループでkeyと比較し同じ場合、<br>
+    　　　　　カウントして１の時のみobjectにkey-valueペアを保管する
+    </p>
+    <div class="wrapper1">
+      <div>
+        <pre>
+          <code>
+            function swapPairs2(object) {
+              const result = {};
+              const arrayOfValues =[];
+              for (const key in object) {
+                const value = object[key];
+                arrayOfValues.push(value);
               }
-            }
+              for (const key1 in object) {
+                const value1 = object[key1];
+                let count = 0;
+                for (const arrayOfValue of arrayOfValues) {
+                  if ( value1 === arrayOfValue ) {
+                    count = count + 1;
+                    if ( count === 1) {
+                      result[value1] = key1;
+                    }
+                  }    
+                }
+              }
               return result;
-           }          
-        </code>
-      </pre>
+            }          
+          </code>
+        </pre>
+      </div>
+      <div>
+        【トライ１】結果<br>
+        <img src=try1_result.jpg>      
+      </div>
+      <div>
+        console.logを使用して動作を確認<br>
+        <img src=try1_result_consolelog.jpg>
+      </div>
+    </div> 
+    <!--wrapper1終了-->
+    <div class="result">
+      ＜結果＞NG：考えた通りには動作せず（結局“d”のタイミングで更新）
     </div>
-    <div>
-      <img src=try1_result.jpg>      
-    </div>
-    <div>
-      <img src=try1_result_consolelog.jpg>
-    </div>
-    <div>＜結果＞NG：考えた通りには動作せず（結局“d”のタイミングで更新）</div>
-    <div>
+    <!--wrapper11終了-->
+  </div>
+  <!--wrap1終了-->
+    <div id="wrap2">
       <p>
         【トライ2】objectにkey-valueペアを保管時に最後に保管すればよい<br>
-        ⇒keyとvalueの逆配列を作り、index順にobjectへ保管する
+        　　　　⇒keyとvalueの逆配列を作り、index順にobjectへ保管する
       </p>
+      <div class="wrapper2">
+        <div>
+          <pre>
+            <code>
+              function swapPairs2(object) {
+                const result = {};
+                const reveseArrayOfValue = [];
+                const reverseArrayOfkey = [];
+                for (const key in object) {
+                  reveseArrayOfValue.unshift(object[key]);
+                  reverseArrayOfkey.unshift(key);
+                }
+                for (const value of reveseArrayOfValue) {
+                  result[value] = reverseArrayOfkey[reveseArrayOfValue.indexOf(value)];
+                }
+                return result;
+              }    
+            </code>
+          </pre>
+        </div>
+        <div>
+          【トライ2】結果<br>
+          <img src=try2_result_array_consolelog.jpg><br><br>
+          <img src=try2_result_consolelog.jpg>      
+        </div>
+        <div class="result">
+          <br><br><br>
+          ＜逆順配列＞OK<br><br><br>
+          ＜結果＞<br>
+          NG：考えた通りには動作せず<br>
+          でも、2回目のvalueを取り込まず（逆に並んでいるし）<br>
+          ⇒正順のまま同様に実施すればOK？
+        </div>
+      </div>
+      <!--wrapper2終了-->
     </div>
-    <div>
-      <pre>
-        <code>
-          function swapPairs2(object) {
-            const result = {};
-            const reveseArrayOfValue = [];
-            const reverseArrayOfkey = [];
-            for (const key in object) {
-              reveseArrayOfValue.unshift(object[key]);
-              reverseArrayOfkey.unshift(key);
-              }
-              for (const value of reveseArrayOfValue) {
-                result[value] = reverseArrayOfkey[reveseArrayOfValue.indexOf(value)];
-              }
-            return result;
-            }    
-        </code>
-      </pre>
-    </div>
-    <div>
-      <img src=try2_result_array_consolelog.jpg>      
-    </div>
-    <div>
-      <img src=try2_result_consolelog.jpg>      
-    </div>
-    <div>＜逆順配列＞OK</div>
-    <div>＜結果＞<br>
-      NG：考えた通りには動作せず<br>
-      でも、2回目のvalueを取り込まず（逆に並んでいるし）<br>
-      ⇒正順のまま同様に実施すればOK？
-    </div>
-    <div>
+    <!--wrap2終了-->
+    <div id="wrap3">
       <p>
         【トライ3回目】keyとvalueの正順配列を作り、index順にobjectへ保管する
       </p>
+      <div class="wrapper3">
+        <div>
+          <pre>
+            <code>
+              function swapPairs2(object) {
+                const result = {};
+                const arrayOfValue = [];
+                const arrayOfkey = [];
+                for (const key in object) {
+                  arrayOfValue.push(object[key]);
+                  arrayOfkey.push(key);
+                  console.log("arrayOfValue:", arrayOfValue);
+                  console.log("arrayOfkey:", arrayOfkey);
+                }
+                for (const value of arrayOfValue) {
+                  result[value] = arrayOfkey[arrayOfValue.indexOf(value)];
+                  console.log("value:", value);
+                  console.log("index:", arrayOfValue.indexOf(value));
+                  console.log(result);
+                }
+                return result;
+              }    
+            </code>
+          </pre>
+        </div>
+        <div>
+          【トライ3】結果<br>
+          <img src=try3_result_array_consolelog.jpg><br><br>
+          <img src=try3_result.jpg>            
+        </div>
+        <div class="result">
+          <br><br><br>
+          ＜正順配列＞OK<br><br><br>
+          ＜結果＞<br>
+          OK：value = 1 ⇒ index = 0<br>
+          となり、重複は回避
+        </div>
+      </div>
+      <!--wrapper3終了-->
     </div>
-    <div>
-      <pre>
-        <code>
-          function swapPairs2(object) {
-            const result = {};
-            const arrayOfValue = [];
-            const arrayOfkey = [];
-            for (const key in object) {
-              arrayOfValue.push(object[key]);
-              arrayOfkey.push(key);
-              console.log("arrayOfValue:", arrayOfValue);
-              console.log("arrayOfkey:", arrayOfkey);
-              }
-              for (const value of arrayOfValue) {
-                result[value] = arrayOfkey[arrayOfValue.indexOf(value)];
-                console.log("value:", value);
-                console.log("index:", arrayOfValue.indexOf(value));
-                console.log(result);
-              }
-            return result;
-            }    
-        </code>
-      </pre>
-    </div>
-    <div>
-      <img src=try3_result_array_consolelog.jpg>      
-    </div>
-    <div>
-      <img src=try3_result.jpg>            
-    </div>
-    <div>＜正順配列＞OK</div>
-    <div>＜結果＞<br>
-      OK：value = 1 ⇒ index = 0<br>
-      　　となり、重複は回避
-    </div>
-  <h2>Ⅲ．まとめ</h2>
+    <!--wrap3終了-->
+    <h2>Ⅲ．まとめ　</h2>
     <ul>
       <li>「#help」チャネンルを活用したり、講義の中で以前より質問ができるようになった</li>
       <li>web検索は、今後も続けることでヒットするワードイメージを持つようにする</li>
       <li>console.log()で表示しながら、jsの動作を確認しながら進める手法が身に付きつつある</li>
-      <li>インストラクターとFND-17のメンバーに感謝！</li>
+      <li>参加許可を出していただいた上司、DIGインストラクターとFND-17のメンバーに感謝！</li>
     </ul>
-</body>
-
-</html>
+    <script type="text/javascript" src="presen.js"></script>
+    <!--先頭h1に戻る-->
+    <a href="#start">先頭に戻る！</a>
+    <!-- JSファイルの読み込み -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+  </body>
+  
+  </html>
