@@ -87,3 +87,7 @@ pre {
 .bolder {
     font-weight: bolder;
 }
+
+.flex {
+    display: flex;
+}
