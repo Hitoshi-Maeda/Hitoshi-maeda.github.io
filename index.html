@@ -20,12 +20,15 @@
   <!--wrapper0終了-->
   <h2>Ⅰ．対象：DAY10　for － in ループ 中級演習１問目　</h2>
   <h3>報告者のプログラミングスキル</h3>
-  <div>30数年前の学生時にFORTRAN77を授業で受けた程度（<font color="red">ほぼスキルなし</font>）
+  <div>30数年前の学生時にFORTRAN77を授業で受けた程度<br>
+    入社後は生産準備業務が中心でソフトウェア関連業務はなし（<font color="red">ほぼスキルなし</font>）
   </div>
   <h2>Ⅱ．報告内容　</h2>
   <h3>１．問題の内容</h3>
   <div>
-    <p>関数 swapPairs2 を宣言してください。</p>
+    <p>関数 swapPairs2 を宣言してください。
+      　オブジェクトの処理なので for ～ in を使うイメージ
+    </p>
     <pre>
       <code>
         /**
@@ -48,28 +51,24 @@
   </div>
   <h3>２．実施内容</h3>
   <div>
-    <style>
-      .pink {
-        background-color: lightpink;
-      }
-    </style>
     <p>
       * @param {object} ⇒パラメータをobjectと定義<br>
       * @returns {object} 与えられたオブジェクトのキーと値を入れ替えた新しいオブジェクト。<br>
       　<span class="pink">重複する値がある場合は、最初のキーと値のペアのみを使用し、その後のペアは無視すること。</span>
     </p>
     <p>
-      【前提】object内のkey-valueペアの順序はどう決まるのか？<br>
+      【まず悩んだこと】object内のkey-valueペアの順序はどう決まるのか？<br>
+      <img src=object_teigi.jpg class="pictbox"> <br>
           　　⇒　webで調べたが、うまくヒットするワードで検索できなかった<br>
-          　　⇒「#help]チャンネル活用＋講義内で質問で解決：今回は”a”から挿入順という判断<br>
+          　　⇒<span class="bolder">DIG slack「#help]チャンネル活用＋講義内で質問で解決</span>：<span class="pink">今回は”a”から挿入順という判断（挿入順の文字列keyは保持される）</span>
     </p>
   </div>
-  <div id="wrap1">
+  <div class="wrap1">
     <p>
     【トライ1】object内のvalueを配列として取り出し、for-inループでkeyと比較し同じ場合、<br>
     　　　　　カウントして１の時のみobjectにkey-valueペアを保管する
     </p>
-    <div class="wrapper1">
+    <div id="wrapper1">
       <div>
         <pre>
           <code>
@@ -113,12 +112,13 @@
     <!--wrapper11終了-->
   </div>
   <!--wrap1終了-->
-    <div id="wrap2">
+    <div class="wrap1">
       <p>
-        【トライ2】objectにkey-valueペアを保管時に最後に保管すればよい<br>
+        【トライ2】「既存のkeyに対してはvalueを設定すると更新される」<br>
+        　　　　<span class="bolder">objectにkey-valueペアを保管時に最後に保管すればよい</span><br>
         　　　　⇒keyとvalueの逆配列を作り、index順にobjectへ保管する
       </p>
-      <div class="wrapper2">
+      <div id="wrapper2">
         <div>
           <pre>
             <code>
@@ -148,18 +148,19 @@
           ＜逆順配列＞OK<br><br><br>
           ＜結果＞<br>
           NG：考えた通りには動作せず<br>
-          でも、2回目のvalueを取り込まず（逆に並んでいるし）<br>
+          でも、2回目のvalueを取り込まず<br>
+          （逆に並んでいるし）<br>
           ⇒正順のまま同様に実施すればOK？
         </div>
       </div>
       <!--wrapper2終了-->
     </div>
-    <!--wrap2終了-->
-    <div id="wrap3">
+    <!--wrap1_2終了-->
+    <div class="wrap1">
       <p>
         【トライ3回目】keyとvalueの正順配列を作り、index順にobjectへ保管する
       </p>
-      <div class="wrapper3">
+      <div id="wrapper3">
         <div>
           <pre>
             <code>
@@ -170,14 +171,9 @@
                 for (const key in object) {
                   arrayOfValue.push(object[key]);
                   arrayOfkey.push(key);
-                  console.log("arrayOfValue:", arrayOfValue);
-                  console.log("arrayOfkey:", arrayOfkey);
                 }
                 for (const value of arrayOfValue) {
                   result[value] = arrayOfkey[arrayOfValue.indexOf(value)];
-                  console.log("value:", value);
-                  console.log("index:", arrayOfValue.indexOf(value));
-                  console.log(result);
                 }
                 return result;
               }    
@@ -199,7 +195,7 @@
       </div>
       <!--wrapper3終了-->
     </div>
-    <!--wrap3終了-->
+    <!--wrap1_3終了-->
     <h2>Ⅲ．まとめ　</h2>
     <ul>
       <li>「#help」チャネンルを活用したり、講義の中で以前より質問ができるようになった</li>
