@@ -42,18 +42,74 @@ div {
 } */
 
 #wrapper1 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
 #wrapper2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
 #wrapper3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#fail1 {
+    background-color: lightpink;
+    color: red;
+    font-size: 500%;
+    width: 500px;
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+}
+
+#fail2 {
+    background-color: lightpink;
+    color: red;
+    font-size: 500%;
+    width: 500px;
+    position: absolute;
+    z-index: 100;
+    top: 10%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+}
+
+#notice {
+    font-size:large;
+    font-weight: bolder;
+    background-color: yellow;
+    position: absolute;
+    z-index: 100;
+    top: 53%;
+    left: 65%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+}
+
+
+#passed {
+    background-color: lightgreen;
+    color: blue;
+    font-size: 500%;
+    width: 500px;
+    text-align: center;
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
 }
 
 pre {
@@ -72,7 +128,7 @@ pre {
 .pictbox {
     display: block;
     width: 300px;
-    transform-origin: top left;
+    transform-origin: bottom left;
     border: solid 1px;
 }
 
@@ -90,4 +146,11 @@ pre {
 
 .flex {
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 1500px;
+}
+
+.right {
+    background-color: lightblue;
 }
